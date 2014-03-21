@@ -46,7 +46,10 @@ STATIONS = [
       'info': None},
     {'name': "FunX Reggae",
       'source': 'http://145.58.53.153:80/funx-reggae-bb-mp3',
-      'info': None}
+      'info': None},
+    {'name': "Lichtschakelaar",
+     'source': 'http://37.46.136.205:80/lichtschakelaar.mp3',
+     'info': None}
 ]
 
 PLAY_SYMBOL = pifacecad.LCDBitmap(
