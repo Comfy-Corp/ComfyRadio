@@ -108,12 +108,6 @@ class Radio(object):
 
     def play(self):
         """Plays the current radio station."""
-        p= subprocess.Popen(['mplayer', self.current_station['source']], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        for line in p.stdout:
-            if line.startswith('ICY Info:'):
-                info = line.split(':', 1)[1].strip()
-                attrs = dict(re.findall("(\w+)='([^']*)'", info))
-                print ('Stream title:'+attrs.get('StreamTitle', '(none)'))
         print("Playing {}.".format(self.current_station['name']))
         play_command = "mplayer -quiet {stationsource}".format(
             stationsource=self.current_station['source'])
@@ -123,7 +117,6 @@ class Radio(object):
             preexec_fn=os.setsid)
         self._is_playing = True
         self.update_display()
-        #get metadata of playing song:
 
     def stop(self):
         """Stops the current radio station."""
@@ -220,14 +213,15 @@ if __name__ == "__main__":
     for pstation in range(4):
         switchlistener.register(
             pstation, pifacecad.IODIR_ON, radio_preset_switch)
-    #switchlistener.register(4, pifacecad.IODIR_ON, end_barrier.wait)
+    switchlistener.register(4, pifacecad.IODIR_ON, end_barrier.wait)
     switchlistener.register(5, pifacecad.IODIR_ON, radio.toggle_playing)
     switchlistener.register(6, pifacecad.IODIR_ON, radio.previous_station)
     switchlistener.register(7, pifacecad.IODIR_ON, radio.next_station)
 
-    switchlistener.activate()
     end_barrier.wait()  # wait unitl exit
 
     # exit
     radio.close()
     switchlistener.deactivate()
+    if irlistener_activated:
+        irlistener.deactivate()
