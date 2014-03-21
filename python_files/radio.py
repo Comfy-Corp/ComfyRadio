@@ -123,7 +123,7 @@ class Radio(object):
             if line.startswith('ICY Info:'):
                 info = line.split(':', 1)[1].strip()
                 attrs = dict(re.findall("(\w+)='([^']*)'", info))
-                print 'Stream title: '+attrs.get('StreamTitle', '(none)')
+                print('Stream title:'+attrs.get('StreamTitle', '(none)')
 
     def stop(self):
         """Stops the current radio station."""
