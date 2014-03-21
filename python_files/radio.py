@@ -108,6 +108,12 @@ class Radio(object):
 
     def play(self):
         """Plays the current radio station."""
+        p= subprocess.Popen(['mplayer', url], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        for line in p.stdout:
+            if line.startswith('ICY Info:'):
+                info = line.split(':', 1)[1].strip()
+                attrs = dict(re.findall("(\w+)='([^']*)'", info))
+                print ('Stream title:'+attrs.get('StreamTitle', '(none)'))
         print("Playing {}.".format(self.current_station['name']))
         play_command = "mplayer -quiet {stationsource}".format(
             stationsource=self.current_station['source'])
@@ -118,12 +124,6 @@ class Radio(object):
         self._is_playing = True
         self.update_display()
         #get metadata of playing song:
-        p= subprocess.Popen(['mplayer', url], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        for line in p.stdout:
-            if line.startswith('ICY Info:'):
-                info = line.split(':', 1)[1].strip()
-                attrs = dict(re.findall("(\w+)='([^']*)'", info))
-                print ('Stream title:'+attrs.get('StreamTitle', '(none)'))
 
     def stop(self):
         """Stops the current radio station."""
