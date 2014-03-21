@@ -47,8 +47,8 @@ STATIONS = [
     {'name': "FunX Reggae",
       'source': 'http://145.58.53.153:80/funx-reggae-bb-mp3',
       'info': None},
-    {'name': "Lichtschakelaar",
-     'source': 'http://37.46.136.205:80/lichtschakelaar.mp3',
+    {'name': "SkyRadio 101FM",
+     'source': 'http://8543.live.streamtheworld.com/SKYRADIOAAC_SC',
      'info': None}
 ]
 
@@ -188,7 +188,7 @@ def radio_preset_ir(event):
 
 
 if __name__ == "__main__":
-    # test for mpalyer
+    # test for mplayer
     try:
         subprocess.call(["mplayer"], stdout=open('/dev/null'))
     except OSError as e:
