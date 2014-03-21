@@ -113,12 +113,17 @@ class Radio(object):
             stationsource=self.current_station['source'])
         self.playing_process = subprocess.Popen(
             play_command,
-            #stdout=subprocess.PIPE,
-            #stderr=subprocess.PIPE,
             shell=True,
             preexec_fn=os.setsid)
         self._is_playing = True
         self.update_display()
+        #get metadata of playing song:
+        p= subprocess.Popen(['mplayer', url], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        for line in p.stdout:
+            if line.startswith('ICY Info:'):
+                info = line.split(':', 1)[1].strip()
+                attrs = dict(re.findall("(\w+)='([^']*)'", info))
+                print 'Stream title: '+attrs.get('StreamTitle', '(none)')
 
     def stop(self):
         """Stops the current radio station."""
@@ -219,21 +224,6 @@ if __name__ == "__main__":
     switchlistener.register(5, pifacecad.IODIR_ON, radio.toggle_playing)
     switchlistener.register(6, pifacecad.IODIR_ON, radio.previous_station)
     switchlistener.register(7, pifacecad.IODIR_ON, radio.next_station)
-
-    irlistener = pifacecad.IREventListener(
-        prog="pifacecad-radio-example",
-        lircrc="radiolircrc")
-    for i in range(4):
-        irlistener.register(str(i), radio_preset_ir)
-
-    switchlistener.activate()
-    try:
-        irlistener.activate()
-    except lirc.InitError:
-        print("Could not initialise IR, radio running without IR contorls.")
-        irlistener_activated = False
-    else:
-        irlistener_activated = True
 
     end_barrier.wait()  # wait unitl exit
 
