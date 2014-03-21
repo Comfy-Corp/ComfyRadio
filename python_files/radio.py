@@ -23,12 +23,9 @@ from pifacecad.lcd import LCD_WIDTH
 UPDATE_INTERVAL = 1
 
 STATIONS = [
-    {'name': "6 Music",
-     'source': 'http://www.bbc.co.uk/radio/listen/live/r6_aaclca.pls',
-     'info': 'http://www.bbc.co.uk/radio/player/bbc_6music'},
-    {'name': "Radio 2",
-     'source': 'http://www.bbc.co.uk/radio/listen/live/r2_aaclca.pls',
-     'info': None},
+    # {'name': "6 Music",
+    #  'source': 'http://www.bbc.co.uk/radio/listen/live/r6_aaclca.pls',
+    #  'info': 'http://www.bbc.co.uk/radio/player/bbc_6music'},
     {'name': "Radio 1 NL",
      'source': 'http://145.58.53.153:80/radio1-bb-mp3',
      'info': None},
@@ -204,7 +201,7 @@ if __name__ == "__main__":
 
     irlistener = pifacecad.IREventListener(
         prog="pifacecad-radio-example",
-        lircrc="/usr/share/doc/python3-pifacecad/examples/radiolircrc")
+        lircrc="radiolircrc")
     for i in range(4):
         irlistener.register(str(i), radio_preset_ir)
 
