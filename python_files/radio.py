@@ -108,7 +108,7 @@ class Radio(object):
 
     def play(self):
         """Plays the current radio station."""
-        p= subprocess.Popen(['mplayer', url], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        p= subprocess.Popen(['mplayer', self.current_station['source']], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         for line in p.stdout:
             if line.startswith('ICY Info:'):
                 info = line.split(':', 1)[1].strip()
