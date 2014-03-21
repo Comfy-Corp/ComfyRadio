@@ -220,15 +220,14 @@ if __name__ == "__main__":
     for pstation in range(4):
         switchlistener.register(
             pstation, pifacecad.IODIR_ON, radio_preset_switch)
-    switchlistener.register(4, pifacecad.IODIR_ON, end_barrier.wait)
+    #switchlistener.register(4, pifacecad.IODIR_ON, end_barrier.wait)
     switchlistener.register(5, pifacecad.IODIR_ON, radio.toggle_playing)
     switchlistener.register(6, pifacecad.IODIR_ON, radio.previous_station)
     switchlistener.register(7, pifacecad.IODIR_ON, radio.next_station)
 
+    switchlistener.activate()
     end_barrier.wait()  # wait unitl exit
 
     # exit
     radio.close()
     switchlistener.deactivate()
-    if irlistener_activated:
-        irlistener.deactivate()
