@@ -30,7 +30,7 @@ STATIONS = [
      'source': 'http://www.bbc.co.uk/radio/listen/live/r2_aaclca.pls',
      'info': None},
     {'name': "Radio 1 NL",
-     'source': '145.58.53.153:80/radio1-bb-mp3'
+     'source': '145.58.53.153:80/radio1-bb-mp3',
      'info': None},
 ]
 
