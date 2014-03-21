@@ -29,17 +29,8 @@ STATIONS = [
     {'name': "Radio 2",
      'source': 'http://www.bbc.co.uk/radio/listen/live/r2_aaclca.pls',
      'info': None},
-    {'name': "Radio 4",
-     'source': 'http://www.bbc.co.uk/radio/listen/live/r4_aaclca.pls',
-     'info': None},
-    {'name': "5 Live",
-     'source': 'http://www.bbc.co.uk/radio/listen/live/r5l_aaclca.pls',
-     'info': None},
-    {'name': "Radio 4 Extra",
-     'source': 'http://www.bbc.co.uk/radio/listen/live/r4x_aaclca.pls',
-     'info': None},
-    {'name': "Planet Rock",
-     'source': 'http://tx.sharp-stream.com/icecast.php?i=planetrock.mp3',
+    {'name': "Radio 1 NL",
+     'source': '145.58.53.153:80/radio1-bb-mp3'
      'info': None},
 ]
 
