@@ -172,7 +172,7 @@ class Radio(object):
     def update_display(self):
         self.update_station()
         self.update_playing()
-        # self.update_volume()
+        self.update_volume()
 
     def update_playing(self):
         """Updated the playing status."""
