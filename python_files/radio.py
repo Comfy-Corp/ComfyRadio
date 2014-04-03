@@ -171,7 +171,6 @@ class Radio(object):
     def update_display(self):
         self.update_station()
         self.update_playing()
-        self.update_volume()
 
     def update_playing(self):
         """Updated the playing status."""
@@ -189,15 +188,6 @@ class Radio(object):
         message = self.current_station['name'].ljust(LCD_WIDTH-1)
         self.cad.lcd.set_cursor(1, 0)
         self.cad.lcd.write(message)
-
-    def update_volume(self):
-        """Updates the display's volume status."""
-        out = check_output(["amixer", "get PCM"])
-        parse = split(out,'[')
-        parse = split(parse[1],']')
-        print("Vol update:{s}").format(s=parse[1])
-        self.cad.lcd.set_cursor(1,1)
-        seld.cad.lcd.write(parse)
 
     def toggle_playing(self, event=None):
         if self.playing:
