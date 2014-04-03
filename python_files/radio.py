@@ -236,9 +236,9 @@ if __name__ == "__main__":
 
     # wait for button presses
     switchlistener = pifacecad.SwitchEventListener(chip=cad)
-    for pstation in range(4):
-        switchlistener.register(
-            pstation, pifacecad.IODIR_ON, radio_preset_switch)
+    # for pstation in range(4):
+    #     switchlistener.register(
+    #         pstation, pifacecad.IODIR_ON, radio_preset_switch)
     #switchlistener.register(4, pifacecad.IODIR_ON, end_barrier.wait)
     switchlistener.register(5, pifacecad.IODIR_ON, radio.toggle_playing)
     switchlistener.register(6, pifacecad.IODIR_ON, radio.previous_station)
