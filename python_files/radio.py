@@ -240,6 +240,8 @@ if __name__ == "__main__":
     #     switchlistener.register(
     #         pstation, pifacecad.IODIR_ON, radio_preset_switch)
     #switchlistener.register(4, pifacecad.IODIR_ON, end_barrier.wait)
+    switchlistener.register(2, pifacecad.IODIR_ON, radio.dec_volume)
+    switchlistener.register(3, pifacecad.IODIR_ON, radio.inc_volume)
     switchlistener.register(5, pifacecad.IODIR_ON, radio.toggle_playing)
     switchlistener.register(6, pifacecad.IODIR_ON, radio.previous_station)
     switchlistener.register(7, pifacecad.IODIR_ON, radio.next_station)
