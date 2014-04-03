@@ -142,6 +142,30 @@ class Radio(object):
     def previous_station(self, event=None):
         self.change_station(self.current_station_index - 1)
 
+
+    def inc_volume(self, event=None):
+        """Increment volume by x"""
+        print("Volume +")
+        """TODO: Check value validity"""
+        subprocess.Popen(
+            "amixer set PCM 500+",
+            #stdout=subprocess.PIPE,
+            #stderr=subprocess.PIPE,
+            shell=True,
+            preexec_fn=os.setsid)
+
+
+    def dec_volume(self, event=None):
+        """Decrement volume by x"""
+        print("Volume -")
+        """TODO: Check value validity"""
+        subprocess.Popen(
+            "amixer set PCM 500-",
+            #stdout=subprocess.PIPE,
+            #stderr=subprocess.PIPE,
+            shell=True,
+            preexec_fn=os.setsid)
+
     def update_display(self):
         self.update_station()
         self.update_playing()
