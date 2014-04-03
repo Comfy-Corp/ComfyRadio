@@ -145,7 +145,6 @@ class Radio(object):
     def previous_station(self, event=None):
         self.change_station(self.current_station_index - 1)
 
-
     def inc_volume(self, event=None):
         """Increment volume by x"""
         print("Volume +")
@@ -182,7 +181,6 @@ class Radio(object):
             char_index = PLAY_SYMBOL_INDEX
         else:
             char_index = PAUSE_SYMBOL_INDEX
-
         self.cad.lcd.set_cursor(0, 0)
         self.cad.lcd.write_custom_bitmap(char_index)
 
