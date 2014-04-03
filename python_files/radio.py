@@ -49,6 +49,9 @@ STATIONS = [
       'info': None},
     {'name': "SkyRadio 101FM",
      'source': 'http://8543.live.streamtheworld.com/SKYRADIOAAC_SC',
+     'info': None},
+    {'name': "Mellow jazz",
+     'source': 'http://pub1.jazzradio.com:80/jr_mellowjazz_aacplus?1aba074d8894838f3cdccfe5',
      'info': None}
 ]
 
@@ -188,6 +191,15 @@ class Radio(object):
         message = self.current_station['name'].ljust(LCD_WIDTH-1)
         self.cad.lcd.set_cursor(1, 0)
         self.cad.lcd.write(message)
+
+    def update_volume(self):
+        """Updates the display's volume status."""
+        out = check_output(["amixer", "get PCM"])
+        parse = split(out,'[')
+        parse = rsplit(parsing,']')
+        print("Vol update:{s}").format(s=parse)
+        self.cad.lcd.set_cursor(1,1)
+        seld.cad.lcd.write(parse)
 
     def toggle_playing(self, event=None):
         if self.playing:
