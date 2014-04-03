@@ -194,8 +194,8 @@ class Radio(object):
         """Updates the display's volume status."""
         out = check_output(["amixer", "get PCM"])
         parse = split(out,'[')
-        parse = rsplit(parsing,']')
-        print("Vol update:{s}").format(s=parse)
+        parse = split(parse[1],']')
+        print("Vol update:{s}").format(s=parse[1])
         self.cad.lcd.set_cursor(1,1)
         seld.cad.lcd.write(parse)
 
