@@ -23,6 +23,7 @@ from pifacecad.lcd import LCD_WIDTH
 UPDATE_INTERVAL = 1
 
 STATIONS = [
+    # HOW TO ADD A MUSIC STREAM (TIP FROM GUUS, THIS STATION IS PRETTY GOOD!)
     # {'name': "6 Music",
     #  'source': 'http://www.bbc.co.uk/radio/listen/live/r6_aaclca.pls',
     #  'info': 'http://www.bbc.co.uk/radio/player/bbc_6music'},
@@ -49,6 +50,9 @@ STATIONS = [
       'info': None},
     {'name': "SkyRadio 101FM",
      'source': 'http://8543.live.streamtheworld.com/SKYRADIOAAC_SC',
+     'info': None},
+    {'name': "Mellow jazz",
+     'source': 'http://pub1.jazzradio.com:80/jr_mellowjazz_aacplus?1aba074d8894838f3cdccfe5',
      'info': None}
 ]
 
@@ -140,10 +144,32 @@ class Radio(object):
     def previous_station(self, event=None):
         self.change_station(self.current_station_index - 1)
 
+    def inc_volume(self, event=None):
+        """Increment volume by x"""
+        print("Volume +")
+        """TODO: Check value validity"""
+        subprocess.Popen(
+            "amixer set PCM 500+",
+            #stdout=subprocess.PIPE,
+            #stderr=subprocess.PIPE,
+            shell=True,
+            preexec_fn=os.setsid)
+
+
+    def dec_volume(self, event=None):
+        """Decrement volume by x"""
+        print("Volume -")
+        """TODO: Check value validity"""
+        subprocess.Popen(
+            "amixer set PCM 500-",
+            #stdout=subprocess.PIPE,
+            #stderr=subprocess.PIPE,
+            shell=True,
+            preexec_fn=os.setsid)
+
     def update_display(self):
         self.update_station()
         self.update_playing()
-        # self.update_volume()
 
     def update_playing(self):
         """Updated the playing status."""
@@ -153,7 +179,6 @@ class Radio(object):
             char_index = PLAY_SYMBOL_INDEX
         else:
             char_index = PAUSE_SYMBOL_INDEX
-
         self.cad.lcd.set_cursor(0, 0)
         self.cad.lcd.write_custom_bitmap(char_index)
 
@@ -210,10 +235,12 @@ if __name__ == "__main__":
 
     # wait for button presses
     switchlistener = pifacecad.SwitchEventListener(chip=cad)
-    for pstation in range(4):
-        switchlistener.register(
-            pstation, pifacecad.IODIR_ON, radio_preset_switch)
-    switchlistener.register(4, pifacecad.IODIR_ON, end_barrier.wait)
+    # for pstation in range(4):
+    #     switchlistener.register(
+    #         pstation, pifacecad.IODIR_ON, radio_preset_switch)
+    #switchlistener.register(4, pifacecad.IODIR_ON, end_barrier.wait)
+    switchlistener.register(2, pifacecad.IODIR_ON, radio.dec_volume)
+    switchlistener.register(3, pifacecad.IODIR_ON, radio.inc_volume)
     switchlistener.register(5, pifacecad.IODIR_ON, radio.toggle_playing)
     switchlistener.register(6, pifacecad.IODIR_ON, radio.previous_station)
     switchlistener.register(7, pifacecad.IODIR_ON, radio.next_station)
